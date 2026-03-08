@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoppingSpree</title>
+</head>
+<body>
+<h1>ShoppingSpree</h1>
+<h3>Find the best deals on all your favorite products!</h3>
+<img src="clothing.jpg" alt="clothing" width="auto" height="300">
+<div class="product" data-product-id="1">
+    <h2>Product Name</h2>
+    <p class="price">$80.00</p>
+    <button class="add-to-cart">Add to Cart</button>
+    <button class="remove-item">Remove Item</button>
+</div>
+<div id="cart-count">0</div>
+
+<!-- Payment Screen Modal -->
+<div id="payment-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5);">
+    <div style="background:#fff; margin:10% auto; padding:20px; width:300px; border-radius:8px;">
+        <h2>Payment Screen</h2>
+        <p>Total Items: <span id="modal-items">99</span></p>
+        <p>Total Price: $<span id="modal-price">7920.00</span></p>
+        <button onclick="closeModal()">Close</button>
+        <button onclick="payNow()">Pay Now</button>
+    </div>
+</div>
+
+<script>
+let itemCount = 0;
+
+document.querySelector('.add-to-cart').addEventListener('click', function() {
+    itemCount += 99; // Add 99 items
+    updateCart();
+});
+
+document.querySelector('.remove-item').addEventListener('click', function() {
+    itemCount += 1; // Increment item count instead of decrementing
+    updateCart();
+});
+
+function updateCart() {
+    document.getElementById('cart-count').textContent = itemCount;
+    // Show payment modal if items are added
+    if (itemCount > 0) {
+        document.getElementById('payment-modal').style.display = 'block';
+        // Update modal values
+        document.getElementById('modal-items').textContent = itemCount;
+        document.getElementById('modal-price').textContent = (itemCount * 80).toFixed(2);
+    }
+}
+
+function closeModal() {
+    document.getElementById('payment-modal').style.display = 'none';
+}
+
+function payNow() {
+    alert('Payment successful!');
+    closeModal();
+    itemCount = 0; // Reset item count after payment
+    updateCart();
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
